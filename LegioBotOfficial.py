@@ -87,10 +87,14 @@ def update():
             ExecList.append(name)
     invent.update({'ExecList':{'$exists':True}},{'ExecList':','.join(ExecList)},upsert = True)
     #adds region name and number of nations to dictionary,adds number of nations to list
-    prevminor = int(invent.find_one({'PrevMinor':{'$exists':True}})['PrevMinor'])
+    prevminor = int(invent.find_one({'PrevMinor':{'$exists':True}})['PrevMinor'][0])
     numnation = list(map(int, numnation))
     totalnations = sum(numnation)
     prevmajor = int(root[-1][13].text)-int(root[0][13].text)
+    prevmajorlist= invent.find_one({'PrevMajor':{'$exists':True}})['PrevMajor']
+    prevmajorlist.append(prevmajor)
+    del prevmajorlist[0]
+    invent.update({'PrevMajor':{'$exists':True}},{'PrevMajor':prevmajorlist},upsert = True)
     secminor = prevminor/totalnations
     secmajor = prevmajor/totalnations
     #calculates how long the previous major took, and splits numnation list into a list with integers rather than strings
@@ -132,8 +136,11 @@ def minortext():
     last = int(tree[0].text)
     #finds update time of first and last regions
     minorvalue = last-first
-    
-    invent.update({'PrevMinor':{'$exists':True}},{'PrevMinor':minorvalue},upsert = True)
+    prevminorlist= invent.find_one({'PrevMinor':{'$exists':True}})['PrevMinor']
+    prevminorlist.append(minorvalue)
+    del prevminorlist[0]
+    invent.update({'PrevMinor':{'$exists':True}},{'PrevMinor':prevminorlist},upsert = True)
+
     #calculates minor time and inputs it to database
                   
 

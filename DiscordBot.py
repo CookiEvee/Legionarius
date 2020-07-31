@@ -248,8 +248,12 @@ async def removecap(ctx,name):
 @bot.command()
 async def PrevMinor(ctx):
     prev=invent.find_one({'PrevMinor':{'$exists':True}})['PrevMinor']
-    await ctx.send(f'Previous Minor is {prev}')
+    await ctx.send(f'Previous Minors are: {prev}')
 
+@bot.command()
+async def PrevMajor(ctx):
+    prev=invent.find_one({'PrevMajor':{'$exists':True}})['PrevMajor']
+    await ctx.send(f'Previous Minors are: {prev}')
 
 @bot.command()
 @commands.has_any_role("Emperor")
@@ -549,11 +553,20 @@ async def on_message(message):
             if listcount[30]>=7:
                 listcount[30]=0
                 await channel.send(file=discord.File('Hi_buddy.jpg'))
+        if "chi" in message.content.lower():
+            if listcount[31]>=7:
+                listcount[31]=0
+                await channel.send(':chitato: > :endertank:')
+        if "ender" in message.content.lower():
+            if listcount[32]>=7:
+                listcount[32]=0
+                await channel.send(file=discord.File('tank-ender-chiuahaha.mp4'))
+
 
     listcount=list(map(lambda x:x+1,listcount))
     await bot.process_commands(message)
     #proceses commands
-listcount=[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+listcount=[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 
 
 
