@@ -600,6 +600,78 @@ async def endocap(ctx):
     #writes ppl over the cap right now
 
 @bot.command()
+@commands.has_any_role('Praetorian Guard', 'Senator','Emperor')
+async def pusher(ctx):
+    pushers={}
+    Req=urllib.request.urlopen("https://www.nationstates.net/cgi-bin/api.cgi?region=the_pacific&q=censusranks;scale=66;mode=score")
+    Open=Req.read().decode("utf-8")
+    Tree=ET.fromstring(Open)
+    FullCap=[]
+    CapWrite=[]
+    data = dict()
+    for item in invent.find({'EndoCap':{'$exists':True}}):
+        data.update(item['EndoCap'])
+    for Nation in Tree[0][0].findall("NATION"):
+        CapNations=[]
+        EndoName=Nation.find('NAME').text
+        Endos=Nation.find('SCORE').text
+        if int(Endos)>10:
+            if str(EndoName) in data:
+                if int(Endos)<=data.get(str(EndoName)):
+                    pass
+                #if fr8er than 10 endos and is not over cap pass, else V
+                else:
+                    try:
+                        FullCap.append(EndoName)
+                        Req=urllib.request.urlopen('https://www.nationstates.net/cgi-bin/api.cgi?nation={}&q=endorsements'.format(EndoName))
+                        Open=Req.read().decode("UTF-8")
+                        EndoTree=ET.fromstring(Open)
+                        Capped=EndoTree[0].text
+                        CapList=Capped.split(",")
+                        CapList2=[]
+                        for nation in CapList:
+                            CapList2.append(nation)
+                            CapNations.append(nation)
+                        CapWrite.append("{} {}".format(EndoName,",".join(CapNations)))
+                        for i in CapList2[data.get(str(EndoName))-1:]:
+                            if i in pushers:
+                                pushers[i].append(EndoName)
+                            else:
+                                pushers[i]=[EndoName]
+                                
+                        #calculates the endorsers and outputs the most recent endorsers who pushed them overcap
+                        time.sleep(1)
+                    except AttributeError:
+                        pass
+            else:
+            #if not in the dictionary default at 10
+                try:
+                    FullCap.append(EndoName)
+                    Req=urllib.request.urlopen('https://www.nationstates.net/cgi-bin/api.cgi?nation={}&q=endorsements'.format(EndoName))
+                    Open=Req.read().decode("UTF-8")
+                    EndoTree=ET.fromstring(Open)
+                    Capped=EndoTree[0].text
+                    CapList=Capped.split(",")
+                    CapList2=[]
+                    for nation in CapList:
+                        CapList2.append(nation)
+                        CapNations.append(nation)
+                    CapWrite.append("{} {}".format(EndoName,",".join(CapNations)))
+                    for i in CapList2[10:]:
+                            if i in pushers:
+                                pushers[i].append(EndoName)
+                            else:
+                                pushers[i]=[EndoName]
+                        
+                    time.sleep(1)
+                except AttributeError:
+                    pass
+        else:
+            break
+    for nation in pushers:
+        await ctx.send(nation + ":" + pushers[nation])
+
+@bot.command()
 @commands.has_any_role('Praetorian Guard','Senator','Emperor')
 async def notendo(ctx):
     Req=urllib.request.urlopen('https://www.nationstates.net/cgi-bin/api.cgi?wa=1&q=members')
