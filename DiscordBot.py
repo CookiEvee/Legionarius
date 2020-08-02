@@ -43,7 +43,7 @@ coupregion = ['*the* Pacific', 'The South Pacific', 'The North Pacific', 'The Ea
 sevlist=['The NPO severs fascist ties to the Pacifics.','Did you know that he came from several regions?',"Have you seen Sev lately? I feel like he hasn't been very expressev.",]
 #lists for the sev trigger
 time.sleep(20)
-os.chdir('/home/ubuntu/Legio_Bot')
+os.chdir('/home/ubuntu/Legionarius')
 bot = commands.Bot(command_prefix='!')
 bot.remove_command('help')
 taglist =[]

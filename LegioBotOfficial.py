@@ -42,7 +42,7 @@ import xml.etree.ElementTree as ET
 from xml.etree.ElementTree import *
 #xml Etree is used to parse XML data
 time.sleep(20)
-os.chdir('/home/ubuntu/Legio_Bot')
+os.chdir('/home/ubuntu/Legionarius')
 opener = urllib.request.build_opener()
 opener.addheaders = [('User-Agent', 'CaveDweller or cookieveenpo@gmail.com')]
 urllib.request.install_opener(opener)
