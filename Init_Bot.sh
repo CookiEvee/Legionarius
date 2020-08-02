@@ -1,1 +1,2 @@
-python3 /home/ubuntu/Legio_Bot/LegioBotOfficial.py  > /home/ubuntu/output.txt
+sleep 50s
+python3 /home/ubuntu/Legionarius/LegioBotOfficial.py 
