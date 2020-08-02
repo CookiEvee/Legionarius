@@ -556,7 +556,7 @@ async def on_message(message):
         if "chi" in message.content.lower():
             if listcount[31]>=7:
                 listcount[31]=0
-                await channel.send(':chitato: > :endertank:')
+                await channel.send('<:chitato:726127044022370315> > <:endertank:734631368251670538>')
         if "ender" in message.content.lower():
             if listcount[32]>=7:
                 listcount[32]=0
