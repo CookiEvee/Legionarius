@@ -1144,5 +1144,5 @@ bot.loop.create_task(Endorsing())
 bot.loop.create_task(checksinc())
 bot.loop.create_task(WAMovement())
 #starts hourly tasks
-bot.run('NDk3Nzk3OTMzNjAxOTE0ODgw.Dpkerg.MB2c0XZxIJG_-SeGofhhomU7cyU')
+bot.run('TOKEN')
 #run bot

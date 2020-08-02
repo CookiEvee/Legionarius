@@ -560,7 +560,7 @@ async def on_message(message):
         if "ender" in message.content.lower():
             if listcount[32]>=7:
                 listcount[32]=0
-                await channel.send(file=discord.File('tank-ender-chiuahaha.mp4'))
+                await channel.send(file=discord.File('chiuahaha.gif'))
 
 
     listcount=list(map(lambda x:x+1,listcount))
@@ -570,4 +570,4 @@ listcount=[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 
 
 
-bot.run('NDk3Nzk3OTMzNjAxOTE0ODgw.Dpkerg.MB2c0XZxIJG_-SeGofhhomU7cyU')
+bot.run('TOKEN')
