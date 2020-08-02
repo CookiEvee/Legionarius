@@ -560,7 +560,7 @@ async def on_message(message):
         if "ender" in message.content.lower():
             if listcount[32]>=7:
                 listcount[32]=0
-                await channel.send(file=discord.File('chiuahaha.gif'))
+                await channel.send(file=discord.File('Chiuahaha.gif'))
 
 
     listcount=list(map(lambda x:x+1,listcount))
